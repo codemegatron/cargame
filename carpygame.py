@@ -10,20 +10,43 @@ car = pygame.image.load("PygameSimplifiedVersionII/images/car.png")
 
 carrect = car.get_rect()
 print("x: {}, y:{}, w:{}, h:{}".format(carrect.x, carrect.y, carrect.width, carrect.height))
+
+class Vehicle:
+	speed = 0
+	angle = 0
+	x = 0
+	y = 0
+	
+	def accelerate(self):
+		self.speed += 5
+	def deccelerate(self):
+		self.speed -= 5
+	def turnLeft(self):
+		self.angle += 10
+	def turnRight(self):
+		self.angle -= 10
+		
+		
+playerCar = Vehicle()
+
+
 	
 while True:
 	
 	key = pygame.key.get_pressed()
 	dist = 1
 	if key[pygame.K_LEFT]:
-		car = pygame.transform.rotate(car,10)
+		playerCar.turnLeft()
+		#car = pygame.transform.rotate(car,10)
 	if key[pygame.K_RIGHT]:
-		car = pygame.transform.rotate(car,-10)
+		playerCar.turnRight()
+		#car = pygame.transform.rotate(car,-10)
 	if key[pygame.K_UP]:
-		carrect.move_ip(0, -1)
+		playerCar.accelerate()
+		#carrect.move_ip(0, -1)
 	if key[pygame.K_DOWN]:
-		carrect.move_ip(0, 1)
-
+		playerCar.deccelerate()
+		#carrect.move_ip(0, 1)
 	
 	pygame.event.get()
 	for event in pygame.event.get():
