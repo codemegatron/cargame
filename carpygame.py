@@ -1,12 +1,13 @@
 import sys, pygame
 from pygame.locals import *
+import math
 
 pygame.init()
-bg = pygame.image.load("PygameSimplifiedVersionII/images/track2.png")
+bg = pygame.image.load("track2.png")
 
 screen = pygame.display.set_mode((400,550))
 black = 0, 0, 0
-car = pygame.image.load("PygameSimplifiedVersionII/images/car.png")
+car = pygame.image.load("car.png")
 
 carrect = car.get_rect()
 print("x: {}, y:{}, w:{}, h:{}".format(carrect.x, carrect.y, carrect.width, carrect.height))
@@ -26,13 +27,17 @@ class Vehicle:
 	def turnRight(self):
 		self.angle -= 10
 		
+	def update(self):
+		self.x += self.speed * math.cos(self.angle)
+		self.y += self.speed * math.sin(self.angle)
+				 
 		
 playerCar = Vehicle()
 
 
 	
 while True:
-	
+	print(playerCar.x, playerCar.y)
 	key = pygame.key.get_pressed()
 	dist = 1
 	if key[pygame.K_LEFT]:
@@ -47,6 +52,7 @@ while True:
 	if key[pygame.K_DOWN]:
 		playerCar.deccelerate()
 		#carrect.move_ip(0, 1)
+	playerCar.update()
 	
 	pygame.event.get()
 	for event in pygame.event.get():
